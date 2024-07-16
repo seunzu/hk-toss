@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transform-translate.html</title>
+    <style>
+        div {
+            position: absolute;
+            top: 70px;
+            left: 30px;
+            width: 200px;
+            height: 100px;
+            padding: 10px;
+            font-weight: bold;
+            color: #FFF;
+        }
+        .original_box {
+            border: #000 dashed 2px;
+            background: #054D4A;
+        }
+        .translate_box {
+            border: #F00 solid 2px;
+            background: rgba(255, 0, 0, 0.8);
+            transform: translate(60px, 60px);
+        }
+    </style>
+</head>
+<body>
+    <h1>translate : 요소 박스를 평면상에서 수평 이동하는 기능을 한다.</h1>
+    <div class="original_box">
+        <p>요소 박스</p>
+    </div>
+    <div class="translate_box">
+        <p>요소 박스</p>
+        <p>transform</p>
+        <p>translate(50px, 50px)</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>text-shadow.html</title>
+    <style>
+        p {
+            color: rgb(5, 77, 74);
+            font-weight: bold;
+            font-size: 80px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 30px;
+        }
+        /* text-shadow : x, y, blur(번짐), color */
+        .shadow_1 {
+            text-shadow:    5px 5px 5px rgba(0, 0, 0, 0.8);
+        }
+        .shadow_2 {
+            text-shadow:    1px 5px 7px rgb(231, 231, 231),
+                            0 0 0 rgba(5, 77, 74, 0.8),
+                            1px 5px 7px rgb(231, 231, 231);
+        }
+        .shadow_3 {
+            text-shadow:    1px 0px 0px #000,  0px 1px 0px #000,
+                            -1px 0px 0px #000, 0px -1px 0px #000;
+        }
+        .shadow_4 {
+            text-shadow:    1px 1px 0px #000, 2px 2px 0px #000,
+                            3px 3px 0px #000, 4px 4px 0px #000,
+                            5px 5px 0px #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>text-shadow 속성</h1>
+    <p class="shadow_1">Spring Framework</p>
+    <p class="shadow_2">Spring Framework</p>
+    <p class="shadow_3">Spring Framework</p>
+    <p class="shadow_4">Spring Framework</p>
+</body>
+</html>

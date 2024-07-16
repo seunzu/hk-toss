@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background.html</title>
+    <style>
+        div {
+            width: 300px;
+            height: 160px;
+            font-weight: bold;
+            padding: 20px;
+            border: rgba(20, 240, 30, 0.5) solid 20px;
+            margin: 30px 10px;
+            float: left;
+            position: relative;
+        }
+        span {
+            position: absolute;
+            top: -60px;
+            left: -10px;
+            white-space: nowrap;
+        }
+        .box {
+            background: url(images/tree.png) 50% 50% / 100px 160px no-repeat ,
+                        url(images/rabbit.png) 70px 80px / 50px 50px no-repeat  #FFFFCC;
+        }
+    </style>
+</head>
+<body>
+    <h1>background 속성 - 배경과 관련된 속성을 일괄적으로 지정한다.</h1>
+    <div class="box">
+        <span>여러가지 속성을 일괄로 지정합니다.</span>
+    </div>
+</body>
+</html>

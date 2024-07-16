@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>border-image-repeat.html</title>
+    <style>
+        div {
+            padding: 5px 10px 10px 10px;
+            margin: 10px 10px;
+            width: 100px;
+            height: 20px;
+            font-weight: bold;
+            text-align: center;
+            border: #F00 solid 10px;
+            border-image-source: url("images/border_image.png"); 
+            border-image-slice: 30; /* 30 15; 세로 가로 */
+            /* 30 15 20;  위 가로방향 아래 */
+            /* 30 15 20 7; 위 오른쪽 차래 왼쪽 */
+        }
+        .stretch        {   border-image-repeat: stretch;   }
+        .repeat         {   border-image-repeat: repeat;    }
+        .stretch_repeat {   border-image-repeat: stretch repeat;    }
+        .repeat_stretch {   border-image-repeat: repeat stretch;    }
+        .round          {   border-image-repeat: round;             }
+        .space          {   border-image-repeat: space;             }
+    </style>
+</head>
+<body>
+    <h1>border-image-repeat 속성 : 요소 박스에 지정한 이미지를 반복하는 스타일 설정</h1>
+    <p>원본 이미지 : <img src="images/border_image.png"/></p>
+    <div class="stretch">stretch</div>
+    <div class="repeat">repeat</div>
+    <div class="stretch_repeat">stretch repeat</div>
+    <div class="repeat_stretch">repeat stretch</div>
+    <div class="round">round</div>
+    <div class="space">space</div>
+</body>
+</html>

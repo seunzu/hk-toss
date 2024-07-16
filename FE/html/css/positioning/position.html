@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position.html</title>
+    <style>
+        .box {
+            width: 300px;
+            border: #666 solid 3px;
+            padding: 10px;
+            height: 200px;
+            position: relative;
+        }
+        .box_inner {
+            width: 200px;
+            border: #999 solid 2px;
+            padding: 10px;
+            height: 100px;
+            background: #054D4A;
+            color: #FFF;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>position 속성 - 요소 박스의 배치 방식을 지정한다.</h1>
+    <div class="box">
+        <div class="box_inner">
+            position 속성의 값이 absolute로 지정되면 화면에 영역을 차지하지 않는
+            레이어가 되고 상위요소가 static이 아닌 경우를 기준으로 배치된다.
+        </div>
+    </div>
+</body>
+</html>

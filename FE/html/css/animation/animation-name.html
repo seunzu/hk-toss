@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation-name.html</title>
+    <style>
+        @keyframes ani01 {
+            from {
+                width: 400px;
+                background: rgba(0, 0, 255, 0.5);
+            }
+            50% {
+                transform:scale(1.2, 1.2);
+            }
+            to {
+                width: 400px;
+                background: rgba(255, 0, 0, 0.5);
+            }
+        }
+        @keyframes ani02 {
+            from {
+                background: rgba(255, 0, 0, 0.5);
+            }
+            to {
+                background: rgba(0, 0, 255, 0.5);
+                transform: rotate(360deg);
+            }
+        }
+        .animation_div {
+            margin: 0 auto;
+            width: 200px;
+            margin-bottom: 20px;
+            height: 50px;
+            border: #000 dashed 2px;
+            animation-duration: 3s;
+        }
+        .exam1 {
+            animation-name: ani01;
+        }
+        .exam2 {
+            animation-name: ani02;
+        }
+        .exam3 {
+            animation-name: ani01, ani02;
+        }
+    </style>
+</head>
+<body>
+    <h1>animation-name</h1>
+    <p>@keyframes 규칙으로 생성한 에니메이션 이름을 지정하여 
+        해당 에니메이션이 실행되도록 하는 속성이다.</p>
+    <div class="animation_div exam1">
+        @keyframes ani01을 실행합니다.
+    </div>
+    <div class="animation_div exam2">
+        @keyframes ani02을 실행합니다.
+    </div>
+    <div class="animation_div exam3">
+        @keyframes ani01과 ani02를 모두 실행합니다.
+    </div>
+</body>
+</html>

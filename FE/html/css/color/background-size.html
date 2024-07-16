@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background-size.html</title>
+    <style>
+        .box {
+            width: 1400px;
+            /* border: red solid 10px; */
+        }
+        /* class="box" 안에 있는 4개의 div를 같이 적용시키려면 */
+        /* .box > div { */
+        .box div {
+            border: rgba(100, 100, 100, 0.5) solid 20px;
+            margin: 20px 10px;
+            width: 200px;
+            height: 140px;
+            font-weight: bold;
+            padding: 20px;
+            background-image: url(images/cat.jpg);
+            background-repeat: no-repeat;
+            float: left;
+            position: relative;
+        }
+        .box span {
+            position: absolute;
+            top: -40px;
+        }
+        .bsize1 {
+            background-size: 50px 100px;
+        }
+        .bsize2 {
+            background-size: 50% 50%;
+        }
+        .bsize3 {
+            background-size: contain;
+        }
+        .bsize4 {
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <h1>background-size 속성 - 배경 이미지의 크기를 설정한다.</h1>
+    <div class="box">
+        <div class="bsize1">
+            <span>가로 세로 50px</span>
+        </div>
+        <div class="bsize2">
+            <span>가로 세로 50%</span>
+        </div>
+        <div class="bsize3">
+            <span>contain</span>
+        </div>
+        <div class="bsize4">
+            <span>cover</span>
+        </div>
+    </div>
+</body>
+</html>

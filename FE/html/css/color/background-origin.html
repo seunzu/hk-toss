@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background-origin.html</title>
+    <style>
+        div {
+            width: 100px;
+            height: 60px;
+            font-weight: bold;
+            padding: 20px;
+            border: rgba(20, 244, 20, 0.4) solid 20px;
+            margin: 20px 20px;
+            background-image: url(images/rabbit.png);
+            background-size: 50px 50px;
+            background-repeat: no-repeat;
+            float: left;
+            position: relative;
+        }
+        span {
+            position: absolute;
+            top: -40px;
+        }
+        .borderbox {
+            background-origin: border-box;
+        }
+        .paddingbox {
+            background-origin: padding-box;
+        }
+        .contentbox {
+            background-origin: content-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>background-origin 속성 - 배경 이미지의 시작위치를 설정한다.</h1>
+    <div class="borderbox">
+        <span>border-box</span>
+    </div>
+    <div class="paddingbox">
+        <span>padding-box</span>
+    </div>
+    <div class="contentbox">
+        <span>content-box</span>
+    </div>
+</body>
+</html>

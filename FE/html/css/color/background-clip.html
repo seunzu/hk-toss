@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background-clip.html</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            font-weight: bold;
+            padding: 10px;
+            border: rgba(100, 100, 100, 0.6), solid, 20px;
+            background-image: url(images/rabbit.png);
+            background-size: 50px 50px;
+            margin: 20px 50px;
+            float: left;
+            position: relative;
+        }
+        span {
+            position: absolute;
+            top: -40px;
+        }
+        .borderbox {
+            background-clip: border-box;
+        }
+        .paddingbox {
+            background-clip: padding-box;
+        }
+        .contentbox {
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>background-clip 속성 : 배경 속성이 적용되는 영역을 지정한다.</h1>
+    <div class="borderbox">
+        <span>border-box</span>
+    </div>
+    <div class="paddingbox">
+        <span>padding-box</span>
+    </div>
+    <div class="contentbox">
+        <span>content-box</span>
+    </div>
+</body>
+</html>

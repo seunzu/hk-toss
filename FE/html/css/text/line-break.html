@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>line-break.html</title>
+    <style>
+        p {
+            border: 4px solid blue;
+            width:  200px;
+            padding: 10px; /* 10px 20px 30px 40px; */
+        }
+        .auto   {   line-break: auto;   }
+        .loose  {   line-break: loose;  }
+        .normal {   line-break: normal; }
+        .strict {   line-break: strict; }
+    </style>
+</head>
+<body>
+    <h1>line-break : 요소 내에서 줄바꿈 규칙을 설정한다.</h1>
+    <p class="auto">
+        이 단락에는 line-break 속성 값이 auto로 적용되어 있습니다.
+    </p>
+    <p class="loose">
+        이 단락에는 line-break 속성 값이 loose로 적용되어 있습니다.
+    </p>
+    <p class="normal">
+        이 단락에는 line-break 속성 값이 normal로 적용되어 있습니다.
+    </p>
+    <p class="strict">
+        이 단락에는 line-break 속성 값이 strict로 적용되어 있습니다.
+    </p>
+</body>
+</html>
