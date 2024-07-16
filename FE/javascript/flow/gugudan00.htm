@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        table {
+            text-align: center;
+            border: 1px solid #000;
+        }
+        .title {
+            color:#000;
+            background-color: #57A;
+            font-weight: bold;
+            padding: 5px;
+        }
+        .dan {
+            color: #000;
+            background-color: #FF0;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    
+<script>
+let gugu = '';
+
+gugu += "<h1>구구단</h1>"
+gugu += "<table border='1'>";
+
+for(let i = 2; i <= 9; i++) {
+    gugu += "<tr>";
+    gugu += "<td class='title'>" + i + "단</td>";
+    for(let j = 1; j <= 9; j++) {
+        gugu += "<td class='dan'>" + i + " x " + j + " = " + i*j + "</td>";
+    }
+    gugu += "</td>";
+}
+
+gugu += "</table>";
+document.write(gugu);
+</script>
+</body>
+</html>

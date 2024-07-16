@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>원하는 구구단을 출력합시다.</h1>
+
+<script>
+    let print = '';
+    let dan = prompt("보시고자 하는 구구단의 단을 입력해주세요!", "");
+    
+    print += "<h2 align='center'>" + dan + "단 선택</h2>";
+    print += "<table border='1'><tr>";
+
+    for(j = 1; j <= 9; j++) {
+        print += "<td>" + dan + " x " + j + " = " + dan*j + "</td>";
+    }
+    print += "</tr></table>";
+
+    document.write(print);
+</script>
+</body>
+</html>

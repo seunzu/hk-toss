@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GawiBawiBo.html</title>
+</head>
+<body>
+    
+<script>
+    // 가위(0), 바위(1), 보(2)
+    let user    = prompt("가위, 바위, 보 중에 하나를 입력하세요!!");
+    let comNum  = Math.floor(Math.random() * 3);    // 0, 1, 2 중 하나가 추출된다.
+    let com     = '';   // 컴퓨터가 추출한 값을 가위, 바위, 보로 변환하여 저장할 변수.
+    let userNum = 0;    // 사용자가 입력한 가위, 바위, 보를 숫자로 변환하여 저장할 변수.
+
+    switch(user) {
+        case '가위':    userNum = 0;    break;
+        case '바위':    userNum = 1;    break;
+        case '보':      userNum = 2;    break;
+        default:        alert('다시 입력하세요!');  
+                        location.reload(true); 
+                        // location.href = location.href;
+                        // history.go(0);
+    }
+    if(comNum == 0)         com = "가위";
+    else if(comNum == 1)    com = "바위";
+    else                    com = "보";
+
+    // 판별 : 가위(0), 바위(1), 보(2)
+    if(userNum == 0 && comNum == 2 || userNum == 1 && comNum == 0 || userNum == 2 && comNum == 1) {
+        document.write('<h2>컴퓨터 : ' + com + '</h2>');
+        document.write('<h2>사용자 : ' + user + '</h2>');
+        document.write('<h1>사용자가 이겼습니다.</h1>');
+    } else if(userNum == 0 && comNum == 1 || userNum == 1 && comNum == 2 || userNum == 2 && comNum == 0) {
+        document.write('<h2>컴퓨터 : ' + com + '</h2>');
+        document.write('<h2>사용자 : ' + user + '</h2>');
+        document.write('<h1>컴퓨터가 이겼습니다.</h1>');
+    } else {
+        document.write('<h1>비겼습니다!</h1>');
+    }
+
+
+</script>
+
+</body>
+</html>

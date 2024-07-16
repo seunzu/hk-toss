@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>palindrome.html</title>
+</head>
+<body>
+    
+<script>
+    // Palindrom(회문수) : 숫자를 바로 읽거나, 거꾸로 읽거나 같은 수를 말한다.
+    // 회문수를 인지 아닌지 판단하는 프로그램을 작성해봅시다.
+
+    let number  = prompt("회문수인지 검사할 숫자를 입력하세요!");
+    let imsi    = number;
+    let result  = 0;    // 변수 number를 거꾸로 변환해서 담을 변수
+
+    while(imsi != 0) {
+        // 기존 결과에 10을 곱하고, 거기에 나머지를 더한다.
+        result = result * 10 + Math.floor(imsi % 10); 
+        // 나머지(1 단위의 수)를 추출하여 계산이 끝나면, 1단위를 절삭한다.
+        imsi = Math.floor(imsi / 10);
+    }   
+
+    if(number == result) {
+        alert(number + "는 회문수입니다.");
+    } else {
+        alert(number + "는 회문수가 아닙니다.");
+    }
+
+
+</script>
+
+</body>
+</html>
