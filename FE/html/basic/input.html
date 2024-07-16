@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input.html</title>
+</head>
+<body>
+    <section>
+        <h1>폼 서식</h1>
+        <form action="subpages/result.html" method="get">
+            <p>
+                <h3>text type</h3>
+                <label>아이디</label>
+                <input type="text" name="userID"/>
+            </p>
+            <p>
+                <h3>password type</h3>
+                <label>비밀번호</label>
+                <input type="password" name="userPWD"/>
+            </p>
+            <p>
+                <h3>search type</h3>
+                <label>검색</label><input type="search" name="keyword"/>
+            </p>
+            <p>
+                <h3>tel type</h3>
+                <lable>전화번호</lable>
+                <input type="tel" name="userTel"/>
+            </p>
+            <p>
+                <h3>url type</h3>
+                <label>홈페이지</label>
+                <input type="url" name="myHome"/>
+            </p>
+            <p>
+                <h3>email type</h3>
+                <label>이메일 주소</label>
+                <input type="email" name="userEmail"/>
+            </p>
+            <p>
+                <h3>date type</h3>
+                <label>예약가능 일</label>
+                <input type="date" min="2024-04-07" max="2024-07-23" step="7"/>
+            </p>
+            <p>
+                <h3>month type</h3>
+                <label>예약가능 월</label>
+                <input type="month" min="2024-04-07" max="2024-12-23" step="3"/>
+            </p>
+            <p>
+                <h3>week type</h3>
+                <labe>예약가능 주</labe>
+                <input type="week" min="2024-04-07" max="2024-12-23" step="3"/>
+            </p>
+            <p>
+                <h3>time type</h3>
+                <label>예약가능 시간</label>
+                <input type="time" min="09:00:00" max="22:00:00" step="1800"/>
+            </p>
+            <p>
+                <h3>number type</h3>
+                <label>연령대</label>
+                <input type="number" min="10" max="100" step="10"/>대
+            </p>
+            <p>
+                <h3>range type</h3>
+                <label>만족도 조사</label>
+                <input type="range" min="0" max="100" step="10"/>
+            </p>
+            <p>
+                <h3>color type</h3>
+                <label>색상 선택</label>
+                <input type="color" min="45" max="100" step="10"/>
+            </p>
+            <p>
+                <h3>checkbox type</h3>
+                <label>좋아하는 동물선택하기</label><br/>
+                <input type="checkbox" name="animal">멍멍이
+                <input type="checkbox" name="animal">고양이
+                <input type="checkbox" name="animal">부엉이
+                <input type="checkbox" name="animal">호랑이
+            </p>
+            <p>
+                <h3>radio type</h3>
+                <label>성별</label>
+                <input type="radio" name="gender" checked="checked"/>여자
+                <input type="radio" name="gender"/>남자
+            </p>
+            <p>
+                <h3>file type</h3>
+                <lable>프로필 사진</lable>
+                <input type="file"/>
+            </p>
+            <p>
+                <h3>hidden type</h3>
+                <label>숨겨서 데이터 보내기</label>
+                <input type="hidden" name="hdata" value="abcdef"/>
+            </p>
+            <p>
+                <h3>list type</h3>
+                <label>이사이트를 방문하게된 경로는?</label>
+                <input type="text" list="visitPath" name="vvisitPath" id="vvisitPath"/>
+                <datalist id="visitPath">
+                    <option value="직접 검색"></option>
+                    <option value="친구의 소개"></option>
+                    <option value="광고를 보고"></option>
+                </datalist>
+            </p>
+
+            <hr/>
+            <input type="submit" value="전송"/>
+        </form>
+    </section>
+</body>
+</html>

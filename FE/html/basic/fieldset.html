@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fieldset.html</title>
+</head>
+<body>
+    <h1>fieldset 요소</h1>
+    <h2>서로 연관이 있는 폼 서식을 그룹화할 때 사용한다.</h2>
+    <hr/>
+    <h1>회원가입</h1>
+    <form>
+        <fieldset>
+            <legend>필수입력사항</legend>
+            <p>
+                <label>아 이 디</label>
+                <input type="text" name="userID" maxlength="10" placeholder="아이디입력"/>
+            </p>
+            <p>
+                <label>비밀번호</label>
+                <input type="password" name="userID"/>
+            </p>
+        </fieldset>
+        <br/>
+        <fieldset>
+            <legend>선택입력사항</legend>
+            <p>
+                <label>주 소</label>
+                <input type="text" name="address" maxlength="100" size="60"/>
+            </p>
+            <p>
+                <label>취 미</label>
+                <input type="text" name="hobby"/>
+            </p>
+        </fieldset>
+        <br/>
+        <input type="reset"  value="다시작성"/>
+        <input type="submit" value="회원가입"/>
+    </form>
+</body>
+</html>
