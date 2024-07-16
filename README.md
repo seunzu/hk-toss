@@ -2,3 +2,9 @@
 
 ## 블로그
 - [빙글빙글 돌아가는 Debug 하루](https://debug.tistory.com/category/%ED%95%9C%EA%B5%AD%EA%B2%BD%EC%A0%9C%EC%8B%A0%EB%AC%B8%20with%20toss%20bank)
+
+### FE
+- 코딩 자율학습 HTML + CSS + 자바스크립트
+
+### BE
+
