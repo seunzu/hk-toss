@@ -6,11 +6,10 @@
 // x=3, y=1
 // x=5, y=0
 
-for(let x = 0; x <= 10; x++) {
-    for(let y = 0; y <= 10; y++) {
-        if(2*x + 4*y == 10) {
-            console.log("x=" + x + ", y=" + y);
-        }
+for (let x = 0; x <= 10; x++) {
+  for (let y = 0; y <= 10; y++) {
+    if (2 * x + 4 * y == 10) {
+      console.log("x=" + x + ", y=" + y);
     }
+  }
 }
-

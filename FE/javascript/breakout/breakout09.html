@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>breakout09.html</title>
+    <style>
+        canvas {
+            background: yellow;
+            display: block;
+            margin: 0 auto; /* canvas를 좌우영역의 정중앙으로 위치시킨다.   */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="480" height="320"></canvas>
+
+
+<script>
+const canvas = document.getElementById("myCanvas");
+const ctx    = canvas.getContext("2d");
+
+let x = canvas.width / 2;
+let y = canvas.height - 30;
+
+// 공의 좌표에 더해 질 값
+let dx = 2;
+let dy = -2;
+
+// 공의 반지름
+const ballRadius = 10;
+
+// 공을 치는 패들
+let paddleHeight    = 10;
+let paddleWidth     = 70;
+let paddleX = (canvas.width - paddleWidth) / 2; // 패들의 시작 x축
+
+// 좌측방향, 우측방향 키 설정
+let rightPressed    = false;
+let leftPressed     = false;
+
+// 벽돌에 필요한 변수들을 설정
+const   brickRowCount       = 3;    // 벽돌 행
+const   brickColumnCount    = 5;    // 벽돌 열
+const   brickWidth          = 75;   // 벽돌의 폭
+const   brickHeight         = 20;   // 벽돌의 높이
+const   brickPadding        = 10;   // 벽돌간의 간격
+const   brickOffsetTop      = 30;   // 상단벽과의 간격
+const   brickOffsetLeft     = 30;   // 좌측벽과의 간격
+
+let     score   = 0;    // 점수를 저장할 변수
+
+// 2차원 형태로 벽돌의 위치를 설정한다.
+const   bricks = [];
+for(let c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for(let r = 0; r < brickRowCount; r++) {
+        // status(벽돌의 존재 유무) : 0(벽돌을 그리지 않는다), 1(벽돌을 그린다)
+        bricks[c][r] = {x:0, y:0, status: 1};
+    }
+}
+
+// 키보드에 리스너를 추가한다.
+document.addEventListener("keydown",    keyDownHandler,     false);
+document.addEventListener("keyup",      keyUpHandler,       false);
+// 마우스에 리스너를 추가한다.
+document.addEventListener("mousemove",  mouseMoveHandler,   false);
+
+// e.keyCode ==> 왼쪽 방향키(37), 오른쪽 방향키(39)
+function keyDownHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = true;
+    } else if(e.keyCode == 37) {
+        leftPressed = true;
+    }
+}
+
+// 눌려진 키가 놓여지면
+function keyUpHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = false;
+    } else if(e.keyCode == 37) {
+        leftPressed = false;
+    }
+}
+
+// 마우스를 움직이면
+function mouseMoveHandler(e) {
+    const relativeX = e.clientX -canvas.offsetLeft;
+    if(relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth / 2;
+    }
+}
+
+// 충돌감지 : 공의 중앙이 어느 벽돌과 충돌하는지 확인한다.
+// 벽돌배열을 조사하여 각 벽돌의 좌표를 공의 중앙 위치와 비교한다.
+// 공의 중앙이 어떤 벽돌의 범위 내에 있게되면 공의 진행방향을 바꾼다.
+// 공이 벽돌 안에 존재하려면 아래와 같은 조건에 해당되어야 한다.
+// 1. 공의 x좌표는 벽돌의 x좌표보다 커야 한다.
+// 2. 공의 x좌표는 벽돌의 x좌표 + 벽돌의 폭보다 작아야 한다.
+// 3. 공의 y좌표는 벽돌의 y좌표보다 커야 한다.
+// 4. 공의 y좌표는 벽돌의 y좌표 + 벽돌의 높이보다 작아야 한다.
+function collisionDetection() {
+    for(let c = 0; c < brickColumnCount; c++) {
+        for(let r = 0; r < brickRowCount; r++) {
+            const b = bricks[c][r];
+            if(b.status == 1) { // 상태코드 값이 0이면 벽돌이 없으므로 충돌조사할 필요가 없다.
+                if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                    // if(조건1 && 조건2 && 조건3 && 조건4)
+                    dy = -dy;
+                    b.status = 0;   // 공과 벽돌이 부닥치면 상태코드 값을 0으로 한다.
+                    score++;        // 벽돌이 깨지면 점수를 올려준다.
+                    // 모든 벽돌을 부쉈으면
+                    if(score == brickColumnCount * brickRowCount) {
+                        alert("축하합니다!\n모든 벽돌을 없앴습니다.!");
+                        // 페이지를 다시 로딩하고 경고버튼이 클릭되면 게임을 다시 시작한다.
+                        document.location.reload();
+                    }
+                }
+            }    
+        }
+    }
+}
+
+// 공 그리기
+function drawBall() {
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+
+// 패들 그리기
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#000080";
+    ctx.fill();
+    ctx.closePath();
+}
+
+// 벽돌 그리기
+function drawBricks() {
+    for(let c = 0; c < brickColumnCount; c++) {
+        for(let r = 0; r < brickRowCount; r++) {
+            if(bricks[c][r].status == 1) { // 상태코드 값이 1인 경우만 벽돌을 그린다.
+                let brickX = (c*(brickWidth+brickPadding))  + brickOffsetLeft;
+                let brickY = (r*(brickHeight+brickPadding)) + brickOffsetTop;
+                bricks[c][r].x = brickX;
+                bricks[c][r].y = brickY;
+                ctx.beginPath();
+                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                ctx.fillStyle = "#800000";
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+    }
+}
+
+function drawScore() {
+    ctx.font        = "16px Arial";
+    ctx.fillStyle   = "#FF00FF";
+    ctx.fillText("Score : " + score, 8, 20);
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);   // 공이 지나간 자리를 지운다.
+    drawBricks();
+    drawBall();
+    drawPaddle();
+    drawScore();
+    collisionDetection();
+
+    // 공이 모든 벽을 벗어나지 못하게 하기 위해서
+    // ballRadius를 사용하는 이유는 볼이 반지름만큼 벽을 벗어나지 못하게 하기 위해서
+    // 좌측벽, 우측벽
+    if(x + dx < ballRadius ||  x + dx > canvas.width - ballRadius) {
+        dx = -dx;
+    }
+    // 상단벽, 하단벽
+    if(y + dy < ballRadius) {
+        dy = -dy;
+    } else if(y + dy > canvas.height - ballRadius) {
+        if(x > paddleX && x < paddleX + paddleWidth) {
+            // 공이 패들에 맞으면 공을 튕겨내고
+            dy = -dy;
+        } else {
+            // 공이 패들에 맞지않고 하단벽에 맞으면 게임 끝!!!
+            alert("게임이 끝났습니다!");
+            document.location.reload();
+        }
+    }
+
+    // 패들의 좌우 움직임
+    if(rightPressed && paddleX < canvas.width - paddleWidth) {
+        paddleX += 6;
+    } else if(leftPressed && paddleX > 0) {
+        paddleX -= 6;
+    }
+
+    // 공의 좌표
+    x += dx; y += dy;
+}
+
+// 10밀리세컨드마다 draw()를 실행한다.
+setInterval(draw, 10);
+
+</script>
+
+</body>
+</html>
