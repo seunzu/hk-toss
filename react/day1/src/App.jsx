@@ -25,7 +25,7 @@ function App() {
       />
       <input name="name" onChange={onChangeHandler} value={state.name} />
       {state.log.map((value, index, arr) => (
-        <div> {value}</div>
+        <div>{value}</div>
       ))}
     </div>
   );
