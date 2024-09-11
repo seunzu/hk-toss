@@ -1,12 +1,12 @@
-import logo from "./logo.svg";
 import "./App.css";
+import CustomForm from "./components/customform/CustomForm";
 import Person from "./components/person";
 
+//component .jsx
 function App() {
-  console.log("app");
   return (
     <div className="App">
-      <Person />
+      <CustomForm />
     </div>
   );
 }
