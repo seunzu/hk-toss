@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { calc } from "../../feature/Calc";
+import { calc } from "../../feature/calc";
+import { useRecoilState } from "recoil";
+import resultState from "../../store/calc";
 
-const CalcHandler = ({ result, setResult }) => {
+const CalcHandler = () => {
+  const [result, setResult] = useRecoilState(resultState);
   const [target, setTarget] = useState(0);
   const onChangeTarget = (e) => setTarget(Number(e.target.value));
   const onChangeResult = (targetFunc) => {
