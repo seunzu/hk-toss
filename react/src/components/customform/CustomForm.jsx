@@ -1,20 +1,22 @@
-import { useState } from "react";
 import { submitSupportFunc } from "../../utils";
+import Input from "../../atom/Input";
+import Form from "../../atom/Form";
 
 const CustomForm = () => {
-  const [state, setState] = useState({ name: "", age: 0 });
   const onSubmitHandler = (e) => {
     const data = submitSupportFunc(e);
     console.log(data);
   };
+
   return (
-    <form onSubmit={onSubmitHandler}>
-      <input name="name" required />
+    <Form onSubmit={onSubmitHandler} warning={true}>
+      <Input name="name" required />
       <br />
-      <input name="age" />
+      <Input name="age" />
       <br />
-      <input type="submit" />
-    </form>
+      <Input type="submit" />
+    </Form>
   );
 };
+
 export default CustomForm;

@@ -1,6 +1,6 @@
-const Input = () => {
-  const style = { borderColor: "red" };
-  return <input stype={style} />;
+const Input = (props) => {
+  console.log(props);
+  return <input style={{ borderColor: "red" }} {...props} />;
 };
 
 export default Input;

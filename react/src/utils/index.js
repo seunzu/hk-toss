@@ -7,4 +7,5 @@ const submitSupportFunc = (e) => {
       obj[target[i].name] = target[i].value;
   return obj;
 };
+
 export { submitSupportFunc };
