@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React from "react";
 
 //component .jsx
 function App2() {
-  const [text, setText] = useState("");
+  const [text, setText] = React.useState("");
   console.log("app2");
 
   return (
