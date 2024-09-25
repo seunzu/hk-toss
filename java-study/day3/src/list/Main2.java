@@ -10,7 +10,7 @@ public class Main2 {
         list.add(5);
         list.add(4);
         list.add(9);
-        int target = 11;
+        int target = 7;
         int[] answer = new int[2]; 
 
         // 조건1. 안에 있는 수 2개 더해서 target이 되어야 함
@@ -53,14 +53,14 @@ public class Main2 {
 //        }
 
         // #3
-//        int[] tmp = new int[11];
+//        Integer[] tmp = new Integer[11];
 //        for (int i = 0; i < list.size(); i++) {
 //            int num = list.get(i);
-//            if (tmp[num] == 0) tmp[num] = i;
+//            if (tmp[num] == null) tmp[num] = i;
 //        }
 //        System.out.println(Arrays.toString(tmp));
 //        for (int i = 0; i < tmp.length; i++) {
-//            if (tmp[i] != 0) {
+//            if (tmp[i] != null && tmp[target - i] != null) {
 //                if (tmp[i] < tmp[target - i]) {
 //                    answer[0] = i;
 //                    answer[1] = target - i;
