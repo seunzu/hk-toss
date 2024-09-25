@@ -1,4 +1,4 @@
-package custom;
+package list;
 
 public interface CustomList<T> {
 

@@ -1,4 +1,4 @@
-package genericTest;
+package generic;
 
 public class Product {
     private String name;

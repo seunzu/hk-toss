@@ -1,4 +1,4 @@
-package custom;
+package list;
 
 import java.util.Arrays;
 
@@ -32,9 +32,8 @@ public class CustomArrayList<T> implements CustomList {
         Object[] before = arr;
         if (size == arr.length) arr = new Object[arr.length + 1];
         arr[size++] = item;
-        for (int i = 0; i < before.length; i++) {
-            arr[i] = before[i];
-        }
+        if (before == arr) return;
+        for (int i = 0; i < before.length; i++) arr[i] = before[i];
     }
 
     @Override

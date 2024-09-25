@@ -1,4 +1,4 @@
-package genericTest;
+package generic;
 
 public class Main {
     public static void main(String[] args) {
