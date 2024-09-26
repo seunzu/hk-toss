@@ -78,7 +78,7 @@ public class Main2 {
             int a = list.get(i);
             int b = target - a;
 
-            if (hashMap.containsKey(b)) {
+            if (hashMap.get(b) != null) { // hashMap.containskey(b)
                 answer[0] = b;
                 answer[1] = a;
                 break;
