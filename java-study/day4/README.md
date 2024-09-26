@@ -56,4 +56,37 @@ Queue<Integer> queue = new LinkedList<>();
 * 스택
 * Flood Fill, 그래프, 트리
 
+<hr />
+
+## 디자인 패턴
+- 생성 패턴
+  - **팩토리 메서드**
+  - 추상 팩토리
+  - 빌더
+  - 프로토타입
+  - 싱글턴
+- 구조 패턴
+- 행동 패턴
+
+### 팩토리 메서드(Factory Method) = 정적 생성 메서드
+메서드를 정의, 직접 생성자 호출(``new``연산자)을 사용하여 객체를 생성하는 대신
+객체 생성에 사용되어야 함
+<br /> 자식 클래스들은 이 메서드를 오버라이드 -> 생성될 객체들의 클래스 변경할 수 있음
+
+- 코드의 높은 수준의 유연성 제공
+
+출처: [자바로 작성된 팩토리 메서드](https://refactoring.guru/ko/design-patterns/factory-method/java/example)
+
+```
+public class Coffee {
+
+    // 팩토리 메서드
+    public static Coffee of(String name, int price, String season, String type) {
+    }
+
+    private Coffee(String name, int price, String season, String type) {
+    }
+```
+
+
 
