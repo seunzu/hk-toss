@@ -5,6 +5,7 @@ public class Coffee {
     private int price;
     private SeasonType season; // 봄, 여름, 가을, 겨울
     private CategoryType category; // 커피, 티, 에이드
+    private String status;
 
     // 팩토리 메서드
     // IllegalArgumentException: No enum constant cafe.CategoryType.COFFEE1
@@ -42,6 +43,10 @@ public class Coffee {
         return category;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Coffee{" +
@@ -49,6 +54,8 @@ public class Coffee {
                 ", price=" + price +
                 ", season='" + season + '\'' +
                 ", category='" + category + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
+
 }

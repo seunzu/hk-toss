@@ -3,6 +3,8 @@ package controller;
 import cafe.Coffee;
 import service.CafeService;
 
+import java.util.List;
+
 import static global.Data.coffees;
 import static global.Utils.sc;
 
@@ -32,13 +34,26 @@ public class CafeController {
 
     public void addCoffee() {
         // 유저에게 입력 받는 것
+        System.out.println("입력해주세요");
         String st = sc.nextLine();
         String[] strings = st.split(" ");
         cafeService.coffeeAdd(strings);
+        System.out.println("추가 완료");
     }
 
     public void removeCoffee() {
         String st = sc.nextLine();
         cafeService.coffeeAdd(new String[]{"fds", "fds"});
+    }
+
+    public void printAllCoffees() {
+        List<Coffee> coffeeList = cafeService.getAllCoffees();
+        if (coffeeList.isEmpty()) {
+            System.out.println("없어요");
+            return;
+        }
+        for (Coffee coffee : coffeeList) {
+            System.out.println(coffee);
+        }
     }
 }
