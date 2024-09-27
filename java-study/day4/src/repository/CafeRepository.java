@@ -8,14 +8,10 @@ import java.util.List;
 import static global.Data.coffees;
 
 public class CafeRepository {
-    public void save(Coffee coffee) {
-        coffees.add(coffee);
-        new CoffeeThread(coffee).start();
-    }
 
-    public List<Coffee> findAllCoffees() {
-        return coffees;
-    }
+    private static CafeRepository cafeRepository;
+
+    private CafeRepository() {}
 
     public static CafeRepository getInstance() {
         if (cafeRepository == null) {
@@ -24,7 +20,12 @@ public class CafeRepository {
         return cafeRepository;
     }
 
-    private static CafeRepository cafeRepository;
+    public void save(Coffee coffee) {
+        coffees.add(coffee);
+        new CoffeeThread(coffee).start();
+    }
 
-    private CafeRepository() {};
+    public List<Coffee> findAllCoffees() {
+        return coffees;
+    }
 }

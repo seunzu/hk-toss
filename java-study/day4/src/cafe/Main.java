@@ -5,6 +5,9 @@ import static global.Data.coffees;
 
 // classname.staticMethod();
 // classname:static변수;
+
+// 1번 예제였기 때문에 이 Main 코드 주석 처리 하고 다른 거 실행
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -17,7 +20,7 @@ public class Main {
             String st = sc.nextLine();
             String[] strings = st.split(" ");
             try {
-                coffees[i] = Coffee.of(strings);
+                // coffees[i] = Coffee.of(strings);
             } catch (NumberFormatException e) {
                 System.out.println("가격 입력 다시");
                 i--;

@@ -17,19 +17,19 @@ public class CafeController {
 //        return instance;
 //    }
 
-    // 지연 초기화 ~> 메모리 효율적으로 사용 But, 멀티스레드 환경에서는 동기화 신경 써야 함
-    public static CafeController getInstance() {
-        if (cafeController == null) {
-            cafeController = new CafeController();
-        }
-        return cafeController;
-    }
-
     private static CafeController cafeController;
     private final CafeService cafeService;
 
     public CafeController() {
         cafeService = CafeService.getInstance();
+    }
+
+    // 지연 초기화 ~> 메모리 효율적으로 사용 But, 멀티스레드 환경에서는 동기화 신경 써야 함
+    public static synchronized CafeController getInstance() {
+        if (cafeController == null) {
+            cafeController = new CafeController();
+        }
+        return cafeController;
     }
 
     public void addCoffee() {

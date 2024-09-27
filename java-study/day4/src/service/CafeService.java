@@ -10,6 +10,21 @@ import static global.Data.coffees;
 // service 유저의 입력으로 나의 로직을 처리하는 곳
 // 개발자가 로직을 펼치는 곳
 public class CafeService {
+
+    private final CafeRepository cafeRepository;
+    private static CafeService cafeService;
+
+    private CafeService() {
+        this.cafeRepository = CafeRepository.getInstance();
+    }
+
+    public static CafeService getInstance() {
+        if (cafeService == null) {
+            cafeService = new CafeService();
+        }
+        return cafeService;
+    }
+
     public List<Coffee> getAllCoffees() {
         System.out.println("음...");
         return cafeRepository.findAllCoffees();
@@ -28,18 +43,4 @@ public class CafeService {
             System.out.println("타입 입력 다시");
         }
     }
-
-    public static CafeService getInstance() {
-        if (cafeService == null) {
-            cafeService = new CafeService();
-        }
-        return cafeService;
-    }
-
-    private static CafeService cafeService;
-    private CafeService() {
-        this.cafeRepository = CafeRepository.getInstance();
-    }
-
-    private final CafeRepository cafeRepository;
 }
