@@ -117,7 +117,7 @@ next.js
 ## AOP(Aspect Oriented Programming) 관점 지향 프로그래밍
 
 애플리케이션에 공통적으로 나타나는 부가적인 기능들을 독립적으로 모듈화하는 프로그래밍 모델
-`@Transactional`이라는 선언적 트랜잭션 기능을 구현
+<br /> `@Transactional`이라는 선언적 트랜잭션 기능을 구현
 
 ## PSA(Portable Service Abstraction) 서비스 추상화
 
@@ -126,3 +126,109 @@ next.js
 <br/>ex. Spring Web MVC, Transaction
 
 [스프링의 3대 요소](https://blogshine.tistory.com/480)
+
+<hr />
+
+# `@Autowired`
+
+필요한 의존 객체의 타입에 해당하는 빈을 찾아 주입
+= 스프링 컨테이너에 등록한 빈에게 의존관계 주입이 필요할 때 DI(의존성 주입)을 도와주는 어노테이션
+
+## 생성자
+
+Constructor 생성자 ~> 의존 관계 주입하는 방법
+
+### 장점
+
+- 의존성 주입 대상 필드를 `final`로 객체 선언 O
+  - 생성자에서 무조건 설정
+- 객체가 생성될 때 딱 한 번 호출되는 것 보장
+  - 의존관계가 변하지 X 경우, 필수 의존관계에 사용
+- 생성자가 하나일 경우 생략 가능
+
+### 단점
+
+- (-) 순환 참조
+
+## 필드(field)
+
+### 장점
+
+- 제일 간단한 방법
+
+### 단점
+
+- 의존 관계가 잘 보이지 않아 추상적 -> 의존성 관계 복잡해질 수 있음
+- SRP(단일 책임 원칙)에 위배
+- DI 컨테이너와 강한 결합 -> 외부 사용 용이 X
+  - 단위 테스트시 의존성 주입 용이 X
+- 의존성 주입 대상 필드를 `final`로 선언 X -> 객체 변경 가능
+
+## 수정자(setter)
+
+### 장점
+
+- 의존성 선택적으로 필요한 경우
+
+### 단점
+
+- 의존성 주입 대상 필드를 `final`로 선언 X -> 객체 변경 가능
+
+클래스의 종속성을 자동으로 연결 = 종속성과 밀접하게 연결되어 있음
+<br />-> 코드의 유연성 ↓, 장기적인 유지 관리 어려워짐
+
+```
+@Service
+public class TestService {
+
+  @Autowired
+  private TestRepository testrepository;
+
+  // ...
+}
+```
+
+=> 대신에 생성자 주입 사용
+
+## 생성자 주입
+
+- 결합 감소: 생성자 주입은 클래스 구현 세부 사항에서 종속 클래스 분리
+- 순환참조 방지: 생성자 주입은 필요한 인자 먼저 확인 -> 인자에 해당하는 빈 생성
+- 불변성 보장: `final` 키워드 사용
+  - 컴파일 오류 ~> 누락 X
+
+=> 기본적으로 생성자 주입 사용, 필수값이 아닌 경우 setter 주입 방식을 옵션으로 부여, 필드 주입 사용 X
+
+```
+@Controller
+public class TestController {
+
+  private final TestService testService;
+
+  public TestController (TestService testService) {
+    this.testService = testService;
+  }
+
+  // ...
+}
+```
+
+[@Autowired란 무엇인가?](https://devlog-wjdrbs96.tistory.com/166)
+<br/>[@Autowired를 지양하는 이유](https://velog.io/@joypeb/Java-Autowired%EB%A5%BC-%EC%A7%80%EC%96%91%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0)
+
+<hr />
+
+# MVC(Model, View, Controller)
+
+## Model(모델)
+
+클라이언트에게 응답으로 돌려주는 작업의 처리 결과 데이터
+
+## View(뷰)
+
+Model을 이용하여 웹 브라우저와 같은 애플리케이션의 화면에 보이는 리소스(Resource)를 제공하는 역할
+
+## Controller(컨트롤러)
+
+클라이언트 측의 요청을 직접적으로 전달받는 엔드포인드(Endpoint)로써 Model과 View의 중간에서 상호작용을 해주는 역할
+클라이언트 측의 요청을 전달받아 비즈니스 로직을 거친 후, Model 데이터가 만들어지면 이 Model 데이터를 View로 전달하는 역할
