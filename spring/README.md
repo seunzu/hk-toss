@@ -232,3 +232,75 @@ Model을 이용하여 웹 브라우저와 같은 애플리케이션의 화면에
 
 클라이언트 측의 요청을 직접적으로 전달받는 엔드포인드(Endpoint)로써 Model과 View의 중간에서 상호작용을 해주는 역할
 클라이언트 측의 요청을 전달받아 비즈니스 로직을 거친 후, Model 데이터가 만들어지면 이 Model 데이터를 View로 전달하는 역할
+
+<hr />
+
+## `Record`
+
+- 보일러 플레이트 코드가 불필요하게 큼
+  - 최소한의 변경(인자, 혹은 결과 타입)으로 여러 곳에서 재사용 되면 반복적으로 비슷한 형태를 가지고 있는 코드
+  - `getter`,`setter`, `equals`, `hashCode`, `toString` 등
+    -> 데이터 간결하게 표현하기 위한 방법(객체 지향), 불변 데이터 모델링 집중, 데이터 지향 메소드 자동 구현
+    <br />But, `Beans` 대체하기 위한 기술 X + 어노테이션 지향적인 코드 생성하기 위함 X
+- Java 16
+- 다른 클래스 상속 X, 인터페이스 구현 O
+  - `extends` X, `implements` O
+- 필드 `private final` 처리 및 `Setter` 미구현 ~> 불변성 제공
+  - `abstract`로 선언 X
+- `Getter` 구현
+  - 필드명과 동일하게 생성
+- `equals()` 구현
+- `hashCode()` 구현
+- `toString()` 구현
+  => Entity가 아닌 DTO로 사용
+
+```
+public record StoreRequest(String name, String address, short openTime, short closeTime) {}
+
+```
+
+[[Java] record에 대하여](https://velog.io/@pp8817/record)
+
+[Java Record - Spring에서의 사용 사례와 함께](https://velog.io/@gongmeda/Java-Record-톺아보기-Spring-에서의-Record-사용-사례와-함께)
+
+## `Optional<T>`
+
+- java8에 새로 추가
+- null이 올 수 있는 값을 감싸는 Wrapper 클래스
+  - → 다양한 메소드 제공
+- 참조하더라도 NPE(NullPointerException)이 발생하지 않도록 도와줌
+
+[[Spring] Optional 처리](https://velog.io/@ryuneng2/Spring-Optional)
+
+<hr />
+
+리소스(data)를 꺼내 주자
+
+- endpoint /stores
+- method
+  - GET R
+  - POST C
+  - PUT(POST), PATCH(POST) U body o
+  - DELETE(GET) D body x
+
+<br />
+- 전체 스토어를 가져온다.( /stores ) (GET)
+- 스토어에 추가한다. (/stores) (POST)
+- 스토어 안에 id=1 번인거를 가져와라. (/stores/1) (GET)
+- 스토어 안에 이름이 커피가 들어간 친구들 뽑아와라. (/stores?name=커피&opentime=10) (GET)
+- 1번 스토어 이름을 커피로 바꾸고 싶다.
+  - (/stores/1, {name="커피", "ㄹㅇㄴ","ㅇㄴㅁ"}) (PUT)
+  - setName("커피")
+- 나머지 것은 두고 슬쩍 수정 PATCH (패치노트)
+  - [1][2][3]<-[new3]
+- 전에 있던놈을 갈아 치운다 PUT
+- 스토어 1번을 지운다 (stores/1) (DELETE)
+
+### 정리
+
+1. URL 복수형 만 사용해라 (/store x)
+2. 명사만 사용해라 (/stores/create x) -> /stores POST
+3. 소문자로 작성해라 (/storesCreate) -> (/store_create)
+4. 언더바(\_) 말고 하이픈(-)으로 작성해라 (/store_create) -> (/store-create)
+
+[REST API 제대로 알고 사용하기](https://meetup.nhncloud.com/posts/92)
