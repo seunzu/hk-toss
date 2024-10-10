@@ -129,6 +129,32 @@ next.js
 
 <hr />
 
+# `@Bean` vs. `@Component`
+
+Spring 컨테이너에 Bean을 등록
+
+## `@Bean`
+
+- Java 메서드 수준에서 사용
+  - 개발자가 직접 컨트롤할 수 있는 빈 생성 로직이 필요할 때 사용
+- 수동으로 빈을 등록
+  - 필요한 로직 직접 작성해서 빈을 반환하는 메서드 정의
+  - `@Configuration` 클래스 안에 정의된 메서드에 `@Bean`
+- 외부 라이브러리나 제어할 수 없는 클래스들 빈으로 등록하고 싶을 때
+
+## `@Component`
+
+- 클래스 수준에서 사용
+- 자동으로 빈을 등록
+  - 클래스에 `@Component` 붙이면 Spring이 컴포넌트 스캔 ~> 빈을 자동으로 감지하고 등록
+- 사용자 정의 클래스에서 주로 사용
+  - 사용자가 작성한 클래스가 빈으로 등록되어야 할 경우
+- `@Autowired` 이용해서 의존성을 주입할 수 있음
+
+### `@Controller`, `@Service`, `@Repository`
+
+<hr />
+
 # `@Autowired`
 
 필요한 의존 객체의 타입에 해당하는 빈을 찾아 주입
@@ -252,7 +278,8 @@ Model을 이용하여 웹 브라우저와 같은 애플리케이션의 화면에
 - `equals()` 구현
 - `hashCode()` 구현
 - `toString()` 구현
-  => Entity가 아닌 DTO로 사용
+
+=> Entity가 아닌 DTO로 사용
 
 ```
 public record StoreRequest(String name, String address, short openTime, short closeTime) {}
@@ -260,8 +287,7 @@ public record StoreRequest(String name, String address, short openTime, short cl
 ```
 
 [[Java] record에 대하여](https://velog.io/@pp8817/record)
-
-[Java Record - Spring에서의 사용 사례와 함께](https://velog.io/@gongmeda/Java-Record-톺아보기-Spring-에서의-Record-사용-사례와-함께)
+<br/>[Java Record - Spring에서의 사용 사례와 함께](https://velog.io/@gongmeda/Java-Record-톺아보기-Spring-에서의-Record-사용-사례와-함께)
 
 ## `Optional<T>`
 
@@ -284,16 +310,17 @@ public record StoreRequest(String name, String address, short openTime, short cl
   - DELETE(GET) D body x
 
 <br />
+
 - 전체 스토어를 가져온다.( /stores ) (GET)
 - 스토어에 추가한다. (/stores) (POST)
 - 스토어 안에 id=1 번인거를 가져와라. (/stores/1) (GET)
 - 스토어 안에 이름이 커피가 들어간 친구들 뽑아와라. (/stores?name=커피&opentime=10) (GET)
-- 1번 스토어 이름을 커피로 바꾸고 싶다.
+- 1번 스토어 이름을 커피로 바꾸고 싶다
   - (/stores/1, {name="커피", "ㄹㅇㄴ","ㅇㄴㅁ"}) (PUT)
   - setName("커피")
 - 나머지 것은 두고 슬쩍 수정 PATCH (패치노트)
   - [1][2][3]<-[new3]
-- 전에 있던놈을 갈아 치운다 PUT
+- 전에 있던 것을 바꾼다 PUT
 - 스토어 1번을 지운다 (stores/1) (DELETE)
 
 ### 정리
@@ -304,3 +331,5 @@ public record StoreRequest(String name, String address, short openTime, short cl
 4. 언더바(\_) 말고 하이픈(-)으로 작성해라 (/store_create) -> (/store-create)
 
 [REST API 제대로 알고 사용하기](https://meetup.nhncloud.com/posts/92)
+
+<hr />
