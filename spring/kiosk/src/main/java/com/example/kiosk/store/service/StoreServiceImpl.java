@@ -1,20 +1,23 @@
 package com.example.kiosk.store.service;
 
-import com.example.kiosk.store.Store;
+import com.example.kiosk.store.domain.Store;
 import com.example.kiosk.store.StoreNotFoundException;
-import com.example.kiosk.store.StoreRequest;
+import com.example.kiosk.store.domain.StoreRequest;
 import com.example.kiosk.store.Utils;
+import com.example.kiosk.store.domain.StoreResponse;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 @Service
 public class StoreServiceImpl implements StoreService {
 
-    public List<Store> getAllStores() {
-        return Utils.stores;
+    public List<StoreResponse> getAllStores() {
+        List<StoreResponse> list = Utils.stores
+                .stream()
+                .map(StoreResponse::from)
+                .toList();
+        return list;
     }
 
     public Store getStoreById(int id) {

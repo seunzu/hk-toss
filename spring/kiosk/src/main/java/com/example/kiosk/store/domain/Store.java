@@ -1,6 +1,7 @@
-package com.example.kiosk.store;
+package com.example.kiosk.store.domain;
 
 import ch.qos.logback.core.util.StringUtil;
+import com.example.kiosk.store.Utils;
 
 /**
  * 1. 가게
@@ -24,6 +25,7 @@ public class Store {
     private String address;
     private short openTime;
     private short closeTime;
+    private boolean isDeleted;
 
     public Store(String name, String address, short openTime, short closeTime) {
         this.id = Utils.storeCount++;
@@ -31,15 +33,23 @@ public class Store {
         this.address = address;
         this.openTime = openTime;
         this.closeTime = closeTime;
+        this.isDeleted = false;
+    }
+
+    public void delete() {
+        isDeleted = true;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
     public Store update(StoreRequest storeRequest) {
-        if (!StringUtil.isNullOrEmpty(storeRequest.name())) {
+        if (!StringUtil.isNullOrEmpty(storeRequest.name()))
             this.name = storeRequest.name();
-        }
-        if (!storeRequest.address().isEmpty()) {
+        if (!storeRequest.address().isEmpty())
             this.address = storeRequest.address();
-        }
+
         return this;
     }
 
@@ -51,4 +61,15 @@ public class Store {
         return name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public short getOpenTime() {
+        return openTime;
+    }
+
+    public short getCloseTime() {
+        return closeTime;
+    }
 }

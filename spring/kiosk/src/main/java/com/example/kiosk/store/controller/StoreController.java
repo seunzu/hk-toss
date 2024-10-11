@@ -1,6 +1,8 @@
 package com.example.kiosk.store.controller;
 
-import com.example.kiosk.store.*;
+import com.example.kiosk.store.domain.Store;
+import com.example.kiosk.store.domain.StoreRequest;
+import com.example.kiosk.store.domain.StoreResponse;
 import com.example.kiosk.store.service.StoreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +20,7 @@ public class StoreController {
     }
 
     @GetMapping
-    public List<Store> getAllStores() {
+    public List<StoreResponse> getAllStores() {
         return storeService.getAllStores();
     }
 

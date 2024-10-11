@@ -1,4 +1,4 @@
-package com.example.kiosk.store;
+package com.example.kiosk.store.domain;
 
 public record StoreRequest(String name, String address, short openTime, short closeTime) {
 

@@ -1,5 +1,7 @@
 package com.example.kiosk.store;
 
+import com.example.kiosk.store.domain.Store;
+
 import java.util.ArrayList;
 import java.util.List;
 

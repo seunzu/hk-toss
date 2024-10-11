@@ -1,13 +1,14 @@
 package com.example.kiosk.store.service;
 
-import com.example.kiosk.store.Store;
-import com.example.kiosk.store.StoreRequest;
+import com.example.kiosk.store.domain.Store;
+import com.example.kiosk.store.domain.StoreRequest;
+import com.example.kiosk.store.domain.StoreResponse;
 
 import java.util.List;
 
 public interface StoreService {
 
-    List<Store> getAllStores();
+    List<StoreResponse> getAllStores();
     Store getStoreById(int id);
     Store addStore(StoreRequest storeRequest);
     void deleteStore(int id);
