@@ -1,9 +1,9 @@
-package com.example.kiosk.store;
+package com.example.kiosk.exception.store;
 
 public class StoreNotFoundException extends IllegalArgumentException {
 
     public StoreNotFoundException(int id) {
-        super(id + " IS NOT FOUND");
+        super("Store: " + id + " IS NOT FOUND");
     }
 
 }

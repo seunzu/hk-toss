@@ -1,8 +1,8 @@
-package com.example.kiosk.store.service;
+package com.example.kiosk.service.store;
 
-import com.example.kiosk.store.domain.Store;
-import com.example.kiosk.store.domain.StoreRequest;
-import com.example.kiosk.store.domain.StoreResponse;
+import com.example.kiosk.domain.entity.Store;
+import com.example.kiosk.domain.dto.store.StoreRequest;
+import com.example.kiosk.domain.dto.store.StoreResponse;
 
 import java.util.List;
 

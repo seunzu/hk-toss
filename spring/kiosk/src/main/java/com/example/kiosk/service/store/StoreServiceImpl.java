@@ -1,10 +1,10 @@
-package com.example.kiosk.store.service;
+package com.example.kiosk.service.store;
 
-import com.example.kiosk.store.domain.Store;
-import com.example.kiosk.store.StoreNotFoundException;
-import com.example.kiosk.store.domain.StoreRequest;
-import com.example.kiosk.store.Utils;
-import com.example.kiosk.store.domain.StoreResponse;
+import com.example.kiosk.domain.entity.Store;
+import com.example.kiosk.exception.store.StoreNotFoundException;
+import com.example.kiosk.domain.dto.store.StoreRequest;
+import com.example.kiosk.util.StoreUtils;
+import com.example.kiosk.domain.dto.store.StoreResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public class StoreServiceImpl implements StoreService {
 
     public List<StoreResponse> getAllStores() {
-        List<StoreResponse> list = Utils.stores
+        List<StoreResponse> list = StoreUtils.stores
                 .stream()
                 .map(StoreResponse::from)
                 .toList();
@@ -21,26 +21,25 @@ public class StoreServiceImpl implements StoreService {
     }
 
     public Store getStoreById(int id) {
-        return Utils.stores
+        return StoreUtils.stores
                 .stream()
-                .filter(el -> el.getId() == id)
+                .filter(el -> el.getId() == id && !el.isDeleted())
                 .findFirst()
                 .orElseThrow(() -> new StoreNotFoundException(id));
     }
 
     public Store addStore(StoreRequest storeRequest) {
         Store store = storeRequest.toStore();
-        Utils.stores.add(store);
+        StoreUtils.stores.add(store);
         return store;
     }
 
     public void deleteStore(int id) {
-        Store store = getStoreById(id);
-        Utils.stores.remove(store);
+        Store storeById = getStoreById(id);
+        storeById.delete();
     }
 
     public Store updateStore(int id, StoreRequest storeRequest) {
-        Store store = getStoreById(id);
-        return store.update(storeRequest);
+        return getStoreById(id).update(storeRequest);
     }
 }

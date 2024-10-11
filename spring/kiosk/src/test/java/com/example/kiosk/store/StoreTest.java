@@ -1,6 +1,6 @@
 package com.example.kiosk.store;
 
-import com.example.kiosk.store.domain.Store;
+import com.example.kiosk.domain.entity.Store;
 import org.junit.jupiter.api.Test;
 
 public class StoreTest {

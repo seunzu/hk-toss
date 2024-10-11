@@ -1,9 +1,9 @@
-package com.example.kiosk.store.controller;
+package com.example.kiosk.controller;
 
-import com.example.kiosk.store.domain.Store;
-import com.example.kiosk.store.domain.StoreRequest;
-import com.example.kiosk.store.domain.StoreResponse;
-import com.example.kiosk.store.service.StoreService;
+import com.example.kiosk.domain.entity.Store;
+import com.example.kiosk.domain.dto.store.StoreRequest;
+import com.example.kiosk.domain.dto.store.StoreResponse;
+import com.example.kiosk.service.store.StoreService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +48,9 @@ public class StoreController {
     public Store updateStore(@PathVariable(value = "store-id") int id, @RequestBody StoreRequest storeRequest) {
         return storeService.updateStore(id, storeRequest);
     }
+
+
+
 
 
 //    public static void main(String[] args) {

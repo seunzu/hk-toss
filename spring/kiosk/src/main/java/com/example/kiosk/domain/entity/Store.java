@@ -1,7 +1,10 @@
-package com.example.kiosk.store.domain;
+package com.example.kiosk.domain.entity;
 
 import ch.qos.logback.core.util.StringUtil;
-import com.example.kiosk.store.Utils;
+import com.example.kiosk.util.StoreUtils;
+import com.example.kiosk.domain.dto.store.StoreRequest;
+
+import java.util.List;
 
 /**
  * 1. 가게
@@ -26,9 +29,10 @@ public class Store {
     private short openTime;
     private short closeTime;
     private boolean isDeleted;
+    private List<Kiosk> kiosks;
 
     public Store(String name, String address, short openTime, short closeTime) {
-        this.id = Utils.storeCount++;
+        this.id = StoreUtils.storeCount++;
         this.name = name;
         this.address = address;
         this.openTime = openTime;
@@ -53,6 +57,10 @@ public class Store {
         return this;
     }
 
+    public List<Kiosk> getKiosks() {
+        return kiosks;
+    }
+
     public int getId() {
         return id;
     }
@@ -72,4 +80,6 @@ public class Store {
     public short getCloseTime() {
         return closeTime;
     }
+
+
 }

@@ -1,11 +1,11 @@
-package com.example.kiosk.store;
+package com.example.kiosk.exception.store;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class storeExceptionController {
+public class StoreExceptionController {
 
     @ExceptionHandler(StoreNotFoundException.class)
     public ResponseEntity<?> storeNotFoundHandler(StoreNotFoundException e) {
