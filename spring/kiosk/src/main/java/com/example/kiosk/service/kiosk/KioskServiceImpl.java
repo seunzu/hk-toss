@@ -44,7 +44,7 @@ public class KioskServiceImpl implements KioskService {
     @Override
     public KioskResponse addKiosk(KioskRequest kioskRequest) {
         Store store = storeService
-                .getOptionalKioskById(kioskRequest.storeId())
+                .getOptionalStoreById(kioskRequest.storeId())
                 .orElseThrow(() -> new KioskNotFoundException(kioskRequest.storeId()));
         Kiosk kiosk = new Kiosk(kioskRequest.kioskNumber(), store);
         KioskUtils.kiosks.add(kiosk);

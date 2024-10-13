@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface GetStoreService {
 
-    Optional<Store> getOptionalKioskById(int id);
+    Optional<Store> getOptionalStoreById(int id);
 }
