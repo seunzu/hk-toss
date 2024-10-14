@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: spring-db
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul
+    username: test
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+
+# properties
+# spring.database.url=jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul
+# spring.database.username=test
+# spring.database.password=1234
