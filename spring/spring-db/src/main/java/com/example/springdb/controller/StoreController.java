@@ -21,18 +21,18 @@ public class StoreController {
     }
 
     @PutMapping("{id}")
-    public void updateStore(@RequestParam Long id, @RequestBody Store store) {
+    public void updateStore(@PathVariable Long id, @RequestBody Store store) {
         storeService.update(id, store);
     }
 
     @GetMapping
     public List<Store> getAllStores(@RequestParam(name = "name", required = false) String name) {
-        if (StringUtil.isNullOrEmpty(name)) return null;
+        if (StringUtil.isNullOrEmpty(name)) return storeService.getByContainName(name);
         return storeService.getAll();
     }
 
     @GetMapping("{id}")
-    public Store getById(@RequestParam Long id) {
+    public Store getById(@PathVariable Long id) {
         return storeService.getById(id);
     }
 
@@ -41,8 +41,9 @@ public class StoreController {
 //        return storeService.getByContainName(name);
 //    }
 
-    @DeleteMapping
-    public void deleteById(@RequestParam Long id) {
+    @DeleteMapping("{id}")
+    public void deleteById(@PathVariable Long id) {
         storeService.deleteById(id);
     }
+
 }

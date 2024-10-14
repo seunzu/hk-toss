@@ -7,12 +7,9 @@ import java.util.List;
 public interface StoreService {
 
     // post api/v1/stores
-    void save(Store store);
+    Store save(Store store);
     // put api/v1/stores/{id}
-    Store update(Store store);
-
-    void update(Long id, Store store);
-
+    Store update(Long id, Store store);
     // get api/v1/stores/{id}
     Store getById(Long id);
     // get api/v1/stores?name=?

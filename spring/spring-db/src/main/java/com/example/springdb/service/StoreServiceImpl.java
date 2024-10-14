@@ -2,6 +2,7 @@ package com.example.springdb.service;
 
 import com.example.springdb.domain.entity.Store;
 import com.example.springdb.repository.StoreRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,29 +19,18 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public abstract class StoreServiceImpl implements StoreService {
+public class StoreServiceImpl implements StoreService {
 
     private final StoreRepository storeRepository;
 
     @Override
-    public void save(Store store) {
-        Store store1 = new Store(null, "name", "addr");
-        storeRepository.save(store1);
-        log.info("Store1 id: {}", store1.getId());
+    public Store save(Store store) {
+        return storeRepository.save(store);
     }
-
-    static int i = 0;
-    @Override
-    public void update(Long id, Store store) {
-        Store store1 = new Store(1L, "update" + i++, "update");
-        storeRepository.save(store1);
-        // 아이디 있는지 찾아보고 있으면 update, 없으면 insert
-    }
-
 
     @Override
     public Store getById(Long id) {
-        return storeRepository.findById(id);
+        return storeRepository.findById(id).orElseThrow();
     }
 
     @Override
@@ -50,7 +40,7 @@ public abstract class StoreServiceImpl implements StoreService {
 
     @Override
     public List<Store> getByContainName(String name) {
-        return storeRepository.findByName(name);
+        return storeRepository.findByNameContain(name);
     }
 
     @Override
@@ -58,5 +48,14 @@ public abstract class StoreServiceImpl implements StoreService {
         storeRepository.deleteById(id);
     }
 
+    @Override
+    @Transactional // error: rollback, return: commit
+    public Store update(Long id, Store store) {
+        Store store1 = getById(id);
+        store1.setAddress(store.getAddress());
+        store1.setName(store.getName());
+//        return storeRepository.save(store1);
+        return store1;
+    }
 
 }
