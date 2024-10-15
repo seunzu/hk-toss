@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -33,4 +35,7 @@ public class User {
 
     @Column(length = 10, nullable = false)
     private String username;
+
+    @OneToMany(mappedBy = "user")
+    private List<Store> store;
 }
