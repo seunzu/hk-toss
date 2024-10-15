@@ -36,4 +36,5 @@ public class User {
     @OneToMany(mappedBy = "user")
     @Builder.Default
     private List<Store> stores = new ArrayList<>();
+
 }

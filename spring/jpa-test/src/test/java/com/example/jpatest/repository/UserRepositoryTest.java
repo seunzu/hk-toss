@@ -1,25 +1,36 @@
 package com.example.jpatest.repository;
 
 import com.example.jpatest.domain.entity.User;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-//@DataJpaTest
+// @SpringBootTest
+@DataJpaTest
 public class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    String email = "email";
+    String password = "pass";
+    String username = "user";
+
+    @BeforeEach
+    void setUp() {
+        User user = User.builder()
+                .email(email)
+                .password(password)
+                .username(username).build();
+
+        userRepository.save(user);
+    }
 
     @Test
     @DisplayName("빌더_테스트")
@@ -33,13 +44,10 @@ public class UserRepositoryTest {
     }
 
     @Test
-//    @Transactional
+    @Transactional
     void saveTest() {
         // given: 이러한 값이 주어지고
-        String email = "email";
-        String password = "pass";
-        String username = "user";
-
+        String email = "email22";
         User user = User.builder()
                 .email(email)
                 .password(password)
@@ -56,13 +64,9 @@ public class UserRepositoryTest {
     // 5개 저장 -> 전부 맞음
     @Test
     void saveFiveFindFiveTest() {
-        for (int i = 0; i < 5; i++) {
-            String email = "email" + i;
-            String password = "pass" + i;
-            String username = "user" + i;
-
+        for (int i = 0; i < 4; i++) {
             User user = User.builder()
-                    .email(email)
+                    .email(email+i)
                     .password(password)
                     .username(username).build();
 
@@ -77,17 +81,6 @@ public class UserRepositoryTest {
     // email로 저장 -> email로 찾아오기
     @Test
     void saveByEmailFindByEmailTest() {
-        String email = "email";
-        String password = "pass";
-        String username = "user";
-
-        User user = User.builder()
-                .email(email)
-                .password(password)
-                .username(username).build();
-
-        userRepository.save(user);
-
         Optional<User> byEmail = userRepository.findByEmail(email);
         assertTrue(byEmail.isPresent());
         assertEquals(email, byEmail.get().getEmail());
