@@ -1,19 +1,16 @@
 package com.example.jpatest.domain.entity;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(
         name = "USERS",
         indexes = {
@@ -37,5 +34,6 @@ public class User {
     private String username;
 
     @OneToMany(mappedBy = "user")
-    private List<Store> store;
+    @Builder.Default
+    private List<Store> stores = new ArrayList<>();
 }
