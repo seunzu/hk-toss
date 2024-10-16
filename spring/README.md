@@ -333,3 +333,26 @@ public record StoreRequest(String name, String address, short openTime, short cl
 [REST API 제대로 알고 사용하기](https://meetup.nhncloud.com/posts/92)
 
 <hr />
+
+## `findJoinAll()`
+```
+@Query("SELECT u FROM User u join fetch u.stores")
+List<User> findJoinAll();
+```
+
+* Eager Fetching(명시적 패치 조인)
+    * @Query에서 JOIN FETCH를 사용 → 즉시 로딩 수행 
+        = User와 연관된 stores 한 번의 쿼리로 모두 가져옴
+        => 추가적인 쿼리 X 사용할 수 있음
+* 성능 최적화
+    * 연관된 엔티티 한 번의 쿼리로 가져옴 
+        → 연관된 엔티티 가져올 때 추가적인 쿼리가 발생하는 문제(N + 1) 문제를 피할 수 있음
+
+## `findAll()`
+
+* Lazy Fetching(지연 로딩)
+    * User를 가져올 때 User 엔티티만 가져오고, 그와 연관된 Stores 필드는 필요할때(ex. user.getStores() 호출) 추가로 쿼리가 실행되어 가져옴
+* 추가 쿼리 발생
+
+
+
