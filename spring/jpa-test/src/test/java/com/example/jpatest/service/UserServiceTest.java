@@ -1,16 +1,13 @@
 package com.example.jpatest.service;
 
-import com.example.jpatest.domain.dto.UserResponse;
+import com.example.jpatest.domain.dto.*;
 import com.example.jpatest.domain.entity.User;
 import com.example.jpatest.repository.UserRepository;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,25 +16,54 @@ class UserServiceTest {
 
     @Test
     void createUser() {
+
+        String email = "www1234@xxx.com";
+        String password = "1234";
+        String username = "admin";
+
+        UserRequest userRequest = new UserRequest(email, password, username);
+        UserResponse userResponse = userService.createUser(userRequest);
+
+        assertNotNull(userResponse);
+        User findUser = userRepository.findById(userResponse.id()).orElseThrow();
+        assertEquals(email, findUser.getEmail());
+        assertEquals(password, findUser.getPassword());
+        assertEquals(username, findUser.getUsername());
     }
 
     @Test
     void updateUser() {
+        User user = users.get(0);
+        UserRequest userRequest = new UserRequest(user.getEmail(),
+                user.getPassword() + "1231",
+                user.getUsername());
+        UserResponse userResponse = userService.updateUser(user.getId(), userRequest);
+
+        assertNotNull(userResponse);
+
+        User after = userRepository.findById(user.getId()).get();
+        assertEquals(userRequest.password(), after.getPassword());
+        assertEquals(userRequest.username(), after.getUsername());
+        assertNotEquals(userRequest.email(), after.getEmail());
+        assertEquals(user.getEmail(), userResponse.email());
     }
 
-    @Test
-    void deleteUserById() {
-    }
+    @Nested
+    class DeleteUserById {
+        @Test
+        @DisplayName("성공")
+        void deleteUserById() {
+            Long id = users.get(0).getId();
+            userRepository.deleteById(id);
+            assertEquals(9, userRepository.count());
+        }
 
-    @Test
-    void getUserById() {
-        Long id = users.get(0).getId();
-
-        UserResponse userById = userService.getUserById(id);
-
-        assertNotNull(userById);
-        assertEquals(id, userById.id());
-        assertEquals(users.get(0).getEmail(), userById.email());
+        @Test
+        @DisplayName("실패: id가 없는 경우")
+        void deleteUserById_failure() {
+            Long id = -1L;
+            assertThrows(IllegalArgumentException.class, () -> userRepository.deleteById(id));
+        }
     }
 
     @Test
@@ -47,6 +73,27 @@ class UserServiceTest {
         assertEquals(users.get(0).getId(), allUsers.get(0).id());
     }
 
+    @Nested
+    class GetUserById {
+        @Test
+        @DisplayName("성공")
+        void getUserById() {
+            Long id = users.get(0).getId();
+
+            UserResponse userById = userService.getUserById(id);
+
+            assertNotNull(userById);
+            assertEquals(id, userById.id());
+            assertEquals(users.get(0).getEmail(), userById.email());
+        }
+
+        @Test
+        @DisplayName("실패: 못 찾았는 경우 NoSuchElementException 발생")
+        void getUserById_failure_not_found() {
+            Long id = 5421235L;
+            assertThrows(NoSuchElementException.class, () -> userService.getUserById(id));
+        }
+    }
 
     private UserService userService;
     @Autowired

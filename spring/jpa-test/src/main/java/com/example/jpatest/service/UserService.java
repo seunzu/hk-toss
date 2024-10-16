@@ -1,7 +1,6 @@
 package com.example.jpatest.service;
 
-import com.example.jpatest.domain.dto.UserRequest;
-import com.example.jpatest.domain.dto.UserResponse;
+import com.example.jpatest.domain.dto.*;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package com.example.jpatest.domain.entity;
 
+import ch.qos.logback.core.util.StringUtil;
+import com.example.jpatest.domain.dto.UserRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,7 +9,7 @@ import java.util.*;
 
 @Entity
 @Getter
-@Setter
+//@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -37,4 +39,10 @@ public class User {
     @Builder.Default
     private List<Store> stores = new ArrayList<>();
 
+    public void update(UserRequest userRequest) {
+        if (StringUtil.isNullOrEmpty(userRequest.password()))
+            this.password = userRequest.password();
+        if (StringUtil.isNullOrEmpty(userRequest.username()))
+            this.username = userRequest.username();
+    }
 }

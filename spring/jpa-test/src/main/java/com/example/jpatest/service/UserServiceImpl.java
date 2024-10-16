@@ -5,8 +5,10 @@ import com.example.jpatest.domain.entity.User;
 import com.example.jpatest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,20 +20,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse createUser(UserRequest userRequest) {
         User user = userRequest.toEntity();
-        User savedUser = userRepository.save(user);
-        return UserResponse.from(savedUser);
+        return UserResponse.from(userRepository.save(user));
     }
-
+    
     @Override
+    @Transactional
+    // jpa는 업데이트 변경 감지
     public UserResponse updateUser(Long id, UserRequest userRequest) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        user.setEmail(userRequest.email());
-        user.setPassword(userRequest.password());
-        user.setUsername(userRequest.username());
+        // ver1: setter 사용시 변경 열려 있어서 좋지 않음
+//        user.setPassword(userRequest.password());
+//        user.setUsername(userRequest.username());
 
-        User updatedUser = userRepository.save(user);
-        return UserResponse.from(updatedUser);
+        // ver2: 추가, 업데이트에 모두 열려있어서 별로 좋지 않음
+//        User user = User.builder().id(id)
+//                .password(userRequest.password())
+//                .username(userRequest.username()).build();
+
+        // ver3
+        user.update(userRequest);
+//        return UserResponse.from(userRepository.save(user)); -> @Transcational
+        return UserResponse.from(user);
     }
 
     @Override
@@ -43,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new NoSuchElementException("User not found"));
         return UserResponse.from(user);
     }
 
