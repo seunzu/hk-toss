@@ -16,7 +16,6 @@ class UserServiceTest {
 
     @Test
     void createUser() {
-
         String email = "www1234@xxx.com";
         String password = "1234";
         String username = "admin";
@@ -53,9 +52,12 @@ class UserServiceTest {
         @Test
         @DisplayName("성공")
         void deleteUserById() {
-            Long id = users.get(0).getId();
-            userRepository.deleteById(id);
-            assertEquals(9, userRepository.count());
+            userService.deleteUserById(1L);
+            assertFalse(userRepository.findById(1L).isPresent());
+
+//            Long id = users.get(0).getId();
+//            userRepository.deleteById(id);
+//            assertEquals(9, userRepository.count());
         }
 
         @Test
@@ -79,9 +81,7 @@ class UserServiceTest {
         @DisplayName("성공")
         void getUserById() {
             Long id = users.get(0).getId();
-
             UserResponse userById = userService.getUserById(id);
-
             assertNotNull(userById);
             assertEquals(id, userById.id());
             assertEquals(users.get(0).getEmail(), userById.email());
@@ -96,6 +96,7 @@ class UserServiceTest {
     }
 
     private UserService userService;
+
     @Autowired
     private UserRepository userRepository;
 

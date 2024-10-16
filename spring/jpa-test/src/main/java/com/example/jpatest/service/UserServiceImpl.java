@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +19,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse createUser(UserRequest userRequest) {
         User user = userRequest.toEntity();
-        return UserResponse.from(userRepository.save(user));
+        User saveUser = userRepository.save(user);
+        return UserResponse.from(saveUser);
     }
     
     @Override
@@ -59,9 +59,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserResponse> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
+        return userRepository.findAll()
+                .stream()
                 .map(UserResponse::from)
-                .collect(Collectors.toList());
+                .toList();
     }
 }
