@@ -1,8 +1,11 @@
 package com.example.jpatest.controller;
 
 import com.example.jpatest.domain.dto.*;
+import com.example.jpatest.repository.UserRepository;
 import com.example.jpatest.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<UserResponse> addUser(@RequestBody UserRequest userRequest) {
@@ -43,5 +47,10 @@ public class UserController {
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         List<UserResponse> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @GetMapping("/page")
+    public Page<UserResponse> getPage(@PageableDefault Pageable pageable) {
+        return userService.pageUsers(pageable);
     }
 }

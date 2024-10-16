@@ -4,6 +4,7 @@ import com.example.jpatest.domain.dto.*;
 import com.example.jpatest.domain.entity.User;
 import com.example.jpatest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,9 +60,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserResponse> getAllUsers() {
-        return userRepository.findAll()
+        return userRepository.findJoinAll()
                 .stream()
                 .map(UserResponse::from)
                 .toList();
+    }
+
+    @Override
+    public Page<UserResponse> pageUsers(Pageable pageable) {
+        return userRepository
+                .findAll(pageable)
+                .map(UserResponse::from);
     }
 }
