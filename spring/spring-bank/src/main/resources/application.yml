@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: bank
+  datasource:
+    url: jdbc:mysql://localhost:3306/bank?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+jwt:
+  secret: vbasdf4wtrdsgsghasdfasdgasdghasdhasdf23radgsdgahasdf
+  expiration: 31536000000
