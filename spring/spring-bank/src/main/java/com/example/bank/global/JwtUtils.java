@@ -15,7 +15,6 @@ public class JwtUtils {
     private final SecretKey key;
 
     public JwtUtils(@Value("${jwt.expiration}")long expiration, @Value("${jwt.secret}")String secret) {
-        System.out.println(expiration);
         this.expiration = expiration;
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }

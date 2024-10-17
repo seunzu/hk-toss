@@ -7,6 +7,7 @@ import com.example.bank.domain.dto.response.UserResponse;
 public interface UserService {
 
     void register(RegisterRequest registerRequest);
-    UserResponse login(LoginRequest loginRequest);
+    String login(LoginRequest loginRequest);
     UserResponse getById(String id);
+    UserResponse getByToken(String token);
 }

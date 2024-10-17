@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
         name = "PAY"
 )
 public class Pay extends BaseEntity {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer price;
