@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: test
+
+eureka:
+#  client:
+#    server-url:
+#      defaultZone: http://192.168.1.3:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: 9002
+
+jwt:
+  secret: bdsfgafowebiufbgewiagbkjcbxlzlkjx
+  expiration: 31536000000

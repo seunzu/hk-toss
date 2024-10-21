@@ -2,6 +2,12 @@ server:
   port: 9000
 
 spring:
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      name: jwt
+      profile: default
   application:
     name: user-service
   datasource:
@@ -12,7 +18,3 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
-
-jwt:
-  secret: bdsfgafowebiufbgewiagbkjcbxlzlkjx
-  expiration: 31536000000
