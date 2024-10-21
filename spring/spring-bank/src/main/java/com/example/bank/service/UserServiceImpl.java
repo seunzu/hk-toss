@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final JwtUtils jwtUtils;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if(byEmail.isPresent()) throw new RuntimeException("이미 등록된 이메일");
         Optional<User> byUsername = userRepository.findByUsername(registerRequest.username());
         if(byUsername.isPresent()) throw new RuntimeException("이미 등록된 이름");
-        User entity = registerRequest.toEntity();
+        User entity = registerRequest.toEntity(passwordEncoder);
         userRepository.save(entity);
     }
 
@@ -51,7 +53,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Optional<User> loginUser = userRepository.findByEmail(loginRequest.email());
         if(loginUser.isEmpty()) throw new RuntimeException("로그인 실패");
         User user = loginUser.get();
-        if(!user.getPassword().equals(loginRequest.password()))
+        if(passwordEncoder.matches(loginRequest.password(), user.getPassword()))
+//        if(!user.getPassword().equals(loginRequest.password()))
             throw new RuntimeException("로그인 실패");
 //        return UserResponse.from(user);
         return jwtUtils.generateToken(user.getUsername());
