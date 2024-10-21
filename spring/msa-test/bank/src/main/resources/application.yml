@@ -1,0 +1,18 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/user?serverTimezone=Asia/Seoul
+    username: test
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+jwt:
+  secret: bdsfgafowebiufbgewiagbkjcbxlzlkjx
+  expiration: 31536000000
